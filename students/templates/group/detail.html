@@ -1,30 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Group</title>
-</head>
-<body>
-    <a href="/">Home</a>
-                <hr>
-            <table align="center" border="1" cellpadding="5">
-            <tr>
-                <th bgcolor="#ffe4c4">
-                            Group: {{ group }}
-                            <a href="{% url 'group_delete' group_pk %}" >delete</a>
-                            <a href="{% url 'group_update' group_pk %}" >update</a>
-                </th>
-                <th align="left">
+{% extends 'group/base.html' %}
+{% block header %}
+        <p><a href="/">Home</a></p>
+    {% if user.is_authenticated %}
+            {{ user.username }}
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <table align="center" border="1" cellpadding="5">
+        <tr>
+            <th bgcolor="#ffe4c4">
+                        Group: {{ group }}
+                        <a href="{% url 'group_delete' group_pk %}" >delete</a>
+                        <a href="{% url 'group_update' group_pk %}" >update</a>
+            </th>
+            <th align="left">
                 {% if student_list %}
                     {% for student in student_list %}
-                            <p><a href={% url "student_detail" student.pk %}>Student: {{ student }} </a></p>
+                        <p><a href={% url "student_detail" student.pk %}>Student: {{ student }} </a></p>
                     {% endfor %}
 
                 {% else %}
                     <p>No students in group</p>
-                {% endif %}
-                </th>
-            </tr>
-            </table>
-</body>
-</html>
+                 {% endif %}
+            </th>
+        </tr>
+    </table>
+{% endblock %}

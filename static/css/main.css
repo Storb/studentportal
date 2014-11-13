@@ -17,14 +17,25 @@ body {
 #content {
     float: left;
     width: 600px;
-    border: 1px
+    border: 1px solid #49c7df;
     padding: 10px;
 }
 
 #top {
-    position:absolute;
-    top:0;
-    right:0;
-    border: 1px solid #b40000;
-    padding: 10px;
+    float: right;
+
+}
+
+#author {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+#bottom {
+    position: absolute;
+    bottom: 100px;
+}
+
+#futer {
+    bottom: 30px;
 }

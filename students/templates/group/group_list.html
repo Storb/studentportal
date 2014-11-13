@@ -1,10 +1,10 @@
 {% extends 'group/base.html' %}
 
 
-{% block top %}
+{% block header %}
         <p><a href="/">Home</a></p>
     {% if user.is_authenticated %}
-            {{ user.username }}
+            User: {{ user.username }}
     {% endif %}
 {% endblock %}
 
