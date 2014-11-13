@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<li><a href="/">Home</a></li>
+    <p>First name: {{ first_name }}</p>
+   <p>Last name: {{ last_name }}</p>
+    <p>Surname: {{ surname }}</p>
+    <p>Card number: {{ card_number }}</p>
+    <p>Birthday: {{ date_birthday }}</p>
+<a href="{% url "student_update" pk %}">update</a>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'group/base.html' %}
+
+
+{% block top %}
+        <p><a href="/">Home</a></p>
+    {% if user.is_authenticated %}
+            {{ user.username }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <a href="/group_create/">Create group</a>
+
+{% if list %}
+    <table border="1" cellpadding="5">
+    <tr>
+        <th bgcolor="#ffe4c4">Name of the group</th>
+        <th bgcolor="#ffe4c4">Number of students</th>
+        <th bgcolor="#ffe4c4">Elder of group</th>
+    </tr>
+        {% for group in list %}
+
+            <tr>
+                <th><p><a href="{% url 'group_detail' group.id %}" >{{ group.name }}</a></p></th>
+                <th align="center">{{ group.student.count }}</th>
+                <th>{{ group.elder }}</th>
+            </tr>
+
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No groups are available</p>
+{% endif %}
+{% endblock %}
+
