@@ -1,13 +1,9 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, get_object_or_404
 from .models import Group, Student
 from django.http import HttpResponseRedirect
 from .forms import GroupForm, StudentForm
-from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
-
-
-
-
+from django.template import RequestContext
 
 
 
@@ -55,11 +51,6 @@ def group_list(request):
     return render(request, 'group/group_list.html', context)
 
 
-# def settings_show(request):
-#     return render_to_response('group/settings_show.html',
-#                               context_instance = RequestContext(request))
-
-
 def group_detail(request, group_id):
     group = Group.objects.get(id=group_id)
     student_list = group.student.all()
@@ -78,7 +69,7 @@ def student_create(request):
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('student_list'))
+            return HttpResponseRedirect(reverse('student_detail'))
         context = {'form':form}
         return render(request, 'student/student_create.html',context)
     else:
@@ -93,22 +84,22 @@ def student_list(request):
     return render(request, 'student/student_list.html', context)
 
 
-def student_detail(request, student_id):
-    student = Student.objects.get(id=student_id)
+def student_detail(request, pk):
+    student = Student.objects.get(id=pk)
     context = {'first_name':student.first_name, 'last_name':student.last_name,
                'surname':student.surname, 'card_number': student.card_number,
-               'date_birthday':student.date_birthday,'pk':student.id
+               'date_birthday':student.date_birthday,'pk': pk
                }
     return render(request, 'student/detail.html',context)
 
 
-def student_update(request, student_id):
-    instance = get_object_or_404(Student, id=student_id)
+def student_update(request, pk):
+    instance = get_object_or_404(Student, id=pk)
     if request.method == 'POST':
         form = StudentForm(request.POST, instance=instance)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('student_list'))
+            return HttpResponseRedirect(reverse("student_list"))
         context = {'form': form}
         return render(request, 'student/student_update.html', context)
     else:
@@ -120,7 +111,7 @@ def student_update(request, student_id):
 def student_confirm_delete(request,pk):
     student = Student.objects.get(id=pk)
     context = {'student':student}
-    return  render(request, 'student/student_confirm_delete.html', context)
+    return render(request, 'student/student_confirm_delete.html', context)
 
 
 def student_delete(request, pk):
@@ -135,10 +126,13 @@ def elder_list(request):
 
 
 def base(request):
-    return  render(request, 'group/base.html')
+    return render(request, 'base.html')
 
 
+def settings_show(request):
 
+    return render_to_response('group/settings_show.html',
+                              context_instance = RequestContext(request))
 
 
 

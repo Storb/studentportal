@@ -1,4 +1,5 @@
-{% extends 'group/base.html' %}
+{% extends 'group/../../../../templates/base.html' %}
+
 {% block header %}
         <p><a href="/">Home</a></p>
     {% if user.is_authenticated %}
@@ -10,8 +11,10 @@
         <tr>
             <th bgcolor="#ffe4c4">
                         Group: {{ group }}
+                {% if user.is_staff == True %}
                         <a href="{% url 'group_delete' group_pk %}" >delete</a>
                         <a href="{% url 'group_update' group_pk %}" >update</a>
+                {% endif %}
             </th>
             <th align="left">
                 {% if student_list %}

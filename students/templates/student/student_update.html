@@ -1,12 +1,10 @@
-{% extends 'group/base.html' %}
+{% extends 'group/../../../../templates/base.html' %}
+
 {% block content %}
-        <ul>
-        <li><a href="/">Home</a></li>
-            <form action="" method="post">{% csrf_token %}
-                 {{ form.as_p }}
-            <input type="submit" value="Update" />
-            </form>
-        </ul>
+
+    <form action="" method="post">{% csrf_token %}
+         {{ form.as_p }}
+    <input type="submit" value="Update" />
+    </form>
+
 {% endblock content %}
-</body>
-</html>

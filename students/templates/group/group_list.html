@@ -1,18 +1,11 @@
-{% extends 'group/base.html' %}
-
-
-{% block header %}
-        <p><a href="/">Home</a></p>
-    {% if user.is_authenticated %}
-            User: {{ user.username }}
-    {% endif %}
-{% endblock %}
+{% extends 'group/../../../../templates/base.html' %}
 
 {% block content %}
-    <a href="/group_create/">Create group</a>
-
+    {% if user.is_superuser == True %}
+        <a href="{% url "group_create" %}">Create group</a>
+    {% endif %}
 {% if list %}
-    <table border="1" cellpadding="5">
+    <table border="1" cellpadding="" align="center">
     <tr>
         <th bgcolor="#ffe4c4">Name of the group</th>
         <th bgcolor="#ffe4c4">Number of students</th>
@@ -21,7 +14,7 @@
         {% for group in list %}
 
             <tr>
-                <th><p><a href="{% url 'group_detail' group.id %}" >{{ group.name }}</a></p></th>
+                <th><a href="{% url 'group_detail' group.id %}" >{{ group.name }}</a></th>
                 <th align="center">{{ group.student.count }}</th>
                 <th>{{ group.elder }}</th>
             </tr>

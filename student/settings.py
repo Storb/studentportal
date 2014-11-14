@@ -52,6 +52,12 @@ INSTALLED_APPS = (
     'account'
 )
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    # 'django_openid_auth.auth.OpenIDBackend',
+    # 'backend'
+)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,6 +68,22 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'student.middleware.QueryTimeMiddlewareShow',
 )
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    #стандартные
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    #мой
+    'student.template_context_processor.show_settings',
+)
+
+
+
 
 ROOT_URLCONF = 'student.urls'
 
@@ -94,9 +116,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
-
-STATIC_URL = '/static/'

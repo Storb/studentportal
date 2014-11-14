@@ -1,41 +1,57 @@
 body {
-    text-align: center;
-}
-#page {
-    width: 968px;
     text-align: left;
-    margin: 10px auto 20px auto;
-    background-color: #8c8c8c;
+}
+/*#page {*/
+    /*width: 968px;*/
+    /*text-align: left;*/
+    /*margin: 10px auto 20px auto;*/
+    /*background-color: #8c8c8c;*/
+/*}*/
+
+/*#sidebar {*/
+    /*float: left;*/
+    /*width: 200px;*/
+    /*border: 1px solid #b40000;*/
+/*}*/
+
+/*#content {*/
+    /*float: left;*/
+    /*width: 600px;*/
+    /*border: 1px solid #49c7df;*/
+    /*padding: 10px;*/
+/*}*/
+
+/*#top {*/
+    /*float: right;*/
+
+/*}*/
+
+/*#author {*/
+    /*position: absolute;*/
+    /*right: 10px;*/
+    /*top: 10px;*/
+/*}*/
+/*#bottom {*/
+    /*position: absolute;*/
+    /*bottom: 100px;*/
+/*}*/
+
+/*#futer {*/
+    /*bottom: 30px;*/
+/*}*/
+
+.auth-block{
+    text-align: right;
+    width: 10%;
+    background-color: #7cfc00;
 }
 
-#sidebar {
-    float: left;
-    width: 200px;
-    border: 1px solid #b40000;
-}
 
-#content {
-    float: left;
-    width: 600px;
-    border: 1px solid #49c7df;
-    padding: 10px;
+.block{
+    text-align: left;
+    width: 90%;
+    background-color: #faf8ff;
 }
-
-#top {
-    float: right;
-
-}
-
-#author {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-#bottom {
-    position: absolute;
-    bottom: 100px;
-}
-
-#futer {
-    bottom: 30px;
+p {
+    color: black;
 }

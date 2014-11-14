@@ -1,10 +1,9 @@
-{% extends "group/base.html" %}
+{% extends "group/../../../../templates/base.html" %}
 
 
 {% block content %}
     {% if student_list %}
-        <li><a href="/">Home</a></li>
-        <h1><a href="/student_create/">Create student</a></h1>
+        <a href="{% url "student_create" %}">Create student</a>
         <table border="1" cellpadding="1" align="center" width="50%">
         <tr bgcolor="#ffebcd">
             <th><p>S.F.L.</p></th>
@@ -27,8 +26,9 @@
                 </th>
                 </tr>
             {% endfor %}
-
+           </table>
         </tr>
-        </table>
+    {% else %}
+        <p>No student</p>
     {% endif %}
 {% endblock content %}
