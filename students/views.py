@@ -69,7 +69,7 @@ def student_create(request):
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('student_detail'))
+            return HttpResponseRedirect(reverse('student_list'))
         context = {'form':form}
         return render(request, 'student/student_create.html',context)
     else:
@@ -131,7 +131,7 @@ def base(request):
 
 def settings_show(request):
 
-    return render_to_response('group/settings_show.html',
+    return render(request, 'group/settings_show.html',
                               context_instance = RequestContext(request))
 
 

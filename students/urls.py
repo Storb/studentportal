@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^student_delete/(?P<pk>\d+)$', views.student_delete ,name='student_delete'),
     url(r'^student_confirm_delete/(?P<pk>\d+)$', views.student_confirm_delete, name='student_confirm_delete'),
     url(r'^settings/$', views.settings_show, name='settings_show'),
+    # url(r'^user/(?P<pk>\d+)$', views.user, name='user')
     # url(r'^group/$', GroupList.as_view() ,name='group'),
     # url(r'^group_delete/(?P<pk>\d+)$', views.GroupDelete.as_view() ,name='group_delete'),
     # url(r'^group_update/(?P<pk>\d+)$', GroupUpdate.as_view() ,name='group_update'),

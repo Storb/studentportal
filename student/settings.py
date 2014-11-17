@@ -37,6 +37,7 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_URL = reverse_lazy('account:login')
+
 LOGIN_REDIRECT_URL = reverse_lazy('questionnaire:select')
 
 # Application definition
@@ -49,13 +50,14 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'students',
-    'account'
+    'account',
+    'students.management.commands'
 )
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     # 'django_openid_auth.auth.OpenIDBackend',
-    # 'backend'
+    'account.backends.EmailAuthBackend'
 )
 
 MIDDLEWARE_CLASSES = (

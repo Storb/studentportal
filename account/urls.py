@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^accounts/invalid/$', views.invalid_login, name='invalid_login'),
     url(r'^accounts/register_user/$', views.register_user, name='register_user'),
     url(r'^accounts/register_success/$', views.register_success, name='register_success'),
+    url(r'^accounts/user_detail/(?P<pk>\d+)$', views.user_detail, name='user_detail'),
 )
