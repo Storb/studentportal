@@ -14,7 +14,9 @@
         {% for group in list %}
 
             <tr>
-                <th><a href="{% url 'group_detail' group.id %}" >{{ group.name }}</a></th>
+
+                <th><a href="{% url 'group_detail' group.id %}" >{{ group.name }}</a>
+                    <a href = {% url "admin:students_group_change" group.id %}>edit in admin</a></th>
                 <th align="center">{{ group.student.count }}</th>
                 <th>{{ group.elder }}</th>
             </tr>

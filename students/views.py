@@ -119,22 +119,22 @@ def student_delete(request, pk):
     return HttpResponseRedirect(reverse('student_list'))
 
 
-def elder_list(request):
-    elder_list = Student.objects.filter(elder__isnull=False)
-    context = {'elder_list':elder_list}
-    return render(request, 'elder/index.html', context)
-
 
 def base(request):
     return render(request, 'base.html')
 
 
-def settings_show(request):
 
+def settings_show(request):
     return render(request, 'group/settings_show.html',
                               context_instance = RequestContext(request))
 
 
+
+# def elder_list(request):
+#     elder_list = Student.objects.filter(elder__isnull=False)
+#     context = {'elder_list':elder_list}
+#     return render(request, 'elder/index.html', context)
 
 
 # class GroupList(ListView):
