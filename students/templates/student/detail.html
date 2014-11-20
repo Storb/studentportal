@@ -1,21 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="{% url "group_list" %}">group list</a>
-{% endblock %}
-
-{% block content2 %}
-    <table>
-        <tr>
-            <th align="left">
-                <p>Surname: {{ surname }}</p>
-                <p>First name: {{ first_name }}</p>
-                <p>Last name: {{ last_name }}</p>
-                <p>Card number: {{ card_number }}</p>
-                <p>Birthday: {{ date_birthday }}</p>
-                <a href="{% url "student_confirm_delete" pk %}">delete</a>
-                <a href="{% url "student_update" pk %}">update</a>
-            </th>
-        </tr>
-    </table>
-{% endblock %}
+    <div class="content">
+        <p>Surname: {{ surname }}</p>
+        <p>First name: {{ first_name }}</p>
+        <p>Last name: {{ last_name }}</p>
+        <p>Card number: {{ card_number }}</p>
+        <p>Birthday: {{ date_birthday }}</p>
+        <button><a href="{% url "student_confirm_delete" pk %}">delete</a></button>
+        <button><a href="{% url "student_update" pk %}">update</a></button>
+    </div>
+{% endblock %}z

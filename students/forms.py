@@ -1,6 +1,5 @@
 from django.forms import ModelForm
 from .models import Group, Student
-from django import forms
 
 
 

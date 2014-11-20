@@ -51,7 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'students',
     'account',
-    'students.management.commands'
+    'students.management.commands',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -97,7 +97,7 @@ WSGI_APPLICATION = 'student.wsgi.application'
 
 DATABASES = {
     'default': {'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'students',
+        'NAME': 'g_roup',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': '127.0.0.1',

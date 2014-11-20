@@ -2,33 +2,34 @@
 
 
 {% block content %}
-    {% if student_list %}
-        <a href="{% url "student_create" %}">Create student</a>
-        <table border="1" cellpadding="1" align="center" width="50%">
-        <tr bgcolor="#ffebcd">
-            <th><p>S.F.L.</p></th>
-            <th><p>update/delete</p></th>
-        </tr>
-        <tr>
-
-            {% for student in student_list %}
-                <tr>
-                <th align="left">
-                    <p>
-                        <a href="{% url "student_detail" student.id %}"> {{ student}}</a>
-                    </p>
-                </th>
-                <th>
-                    <p>
-                        <a href="{% url "student_update" student.id %}">update</a> /
-                        <a href="{% url "student_confirm_delete" student.id %}">delete</a>
-                    </p>
-                </th>
-                </tr>
-            {% endfor %}
-           </table>
-        </tr>
-    {% else %}
-        <p>No student</p>
-    {% endif %}
+    <div class="content" align="center">
+        <div class="Table">
+            <h3><a href="{% url "student_create" %}">Create student</a></h3>
+            {% if student_list %}
+                <div class="Row">
+                    <div class="Cell">
+                        <p>S.F.L.</p>
+                    </div>
+                    <div class="Cell">
+                        <p>update/delete</p>
+                    </div>
+                </div>
+                {% for student in student_list %}
+                    <div class="Row">
+                        <div class="Cell">
+                              <a href="{% url "student_detail" student.id %}"> {{ student}}</a>
+                        </div>
+                        <div class="Cell">
+                            <p>
+                                <button><a href="{% url "student_update" student.id %}">update</a></button>
+                                <button><a href="{% url "student_confirm_delete" student.id %}">delete</a></button>
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+            {% else %}
+                <p>No student</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock content %}

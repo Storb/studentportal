@@ -1,7 +1,8 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render
 from django.contrib import auth
 from django.core.context_processors import csrf
+
 from .forms import UserCreateForm
 from django.contrib.auth.models import User
 
@@ -28,7 +29,7 @@ def login(request):
 
 
 def invalid_login(request):
-    return render_to_response('accounts/invalid_login.html')
+    return render(request,'accounts/invalid_login.html')
 
 
 def logout(request):
@@ -50,6 +51,6 @@ def register_user(request):
 
 
 def register_success(request):
-    return render_to_response('accounts/register_success.html')
+    return render(request, 'accounts/register_success.html')
 
 

@@ -15,12 +15,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Contact',
             fields=[
-                ('user_ptr', models.OneToOneField(to=settings.AUTH_USER_MODEL, serialize=False, auto_created=True, primary_key=True, parent_link=True)),
+                ('user_ptr', models.OneToOneField(primary_key=True, serialize=False, auto_created=True, to=settings.AUTH_USER_MODEL, parent_link=True)),
             ],
             options={
+                'verbose_name_plural': 'users',
                 'abstract': False,
                 'verbose_name': 'user',
-                'verbose_name_plural': 'users',
             },
             bases=('auth.user',),
         ),

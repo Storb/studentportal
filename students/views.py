@@ -53,9 +53,9 @@ def group_list(request):
 
 def group_detail(request, group_id):
     group = Group.objects.get(id=group_id)
-    student_list = group.student.all()
-    if group.student.filter(group_elder__isnull=False):
-        elder = group.student.filter(group_elder__isnull=False)[0]
+    student_list = group.students.all()
+    if group.students.filter(group_elder__isnull=False):
+        elder = group.students.filter(group_elder__isnull=False)[0]
     else:
         elder = 'None'
     context = {'student_list':student_list, 'group':group.name,
@@ -126,10 +126,12 @@ def base(request):
 
 
 def settings_show(request):
-    return render(request, 'group/settings_show.html',
-                              context_instance = RequestContext(request))
+    return render(request, 'group/settings_show.html')
 
-
+def custom_tags(request):
+    student = get_object_or_404(Student,  id = 1)
+    context = {'student':  student}
+    return render(request, 'custom_tags.html', context )
 
 # def elder_list(request):
 #     elder_list = Student.objects.filter(elder__isnull=False)

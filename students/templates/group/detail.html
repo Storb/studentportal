@@ -1,31 +1,26 @@
 {% extends 'base.html' %}
 
-{% block header %}
-        <p><a href="/">Home</a></p>
-    {% if user.is_authenticated %}
-            {{ user.username }}
-    {% endif %}
-{% endblock %}
+
 {% block content %}
-    <table align="center" border="1" cellpadding="5">
-        <tr>
-            <th bgcolor="#ffe4c4">
-                        Group: {{ group }}
+    <div class="content">
+        Group: {{ group }}
                 {% if user.is_staff == True %}
                         <a href="{% url 'group_delete' group_pk %}" >delete</a>
                         <a href="{% url 'group_update' group_pk %}" >update</a>
                 {% endif %}
-            </th>
-            <th align="left">
-                {% if student_list %}
-                    {% for student in student_list %}
-                        <p><a href={% url "student_detail" student.pk %}>Student: {{ student }} </a></p>
-                    {% endfor %}
+    <div class="Table">
+        {% if student_list %}
+            {% for student in student_list %}
+                <div class="Row">
+                    <div class="Cell">
+                    Student: <a href={% url "student_detail" student.pk %}>{{ student }} </a>
+                    </div>
+                </div>
+            {% endfor %}
 
-                {% else %}
-                    <p>No students in group</p>
-                 {% endif %}
-            </th>
-        </tr>
-    </table>
+            {% else %}
+                <p>No students in group</p>
+        {% endif %}
+    </div>
+    </div>
 {% endblock %}

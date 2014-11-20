@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form action="{% url "group_list"%}" method="post">{% csrf_token %}
-        <p>Are you sure you want to delete " {{ student.surname }} {{ student.first_name }} {{ student.last_name }}"?</p>
-        <td><a href="{% url "student_delete" student.id %}">delete</a></td>
-    </form>
+    <div class="content">
+        <form action="{% url "group_list"%}" method="post">{% csrf_token %}
+            <p>Are you sure you want to delete " {{ student.surname }} {{ student.first_name }} {{ student.last_name }}"?</p>
+            <td><a href="{% url "student_delete" student.id %}">delete</a></td>
+        </form>
+    </div>
 {% endblock %}

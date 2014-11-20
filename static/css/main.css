@@ -1,57 +1,101 @@
 body {
     text-align: left;
 }
-/*#page {*/
-    /*width: 968px;*/
-    /*text-align: left;*/
-    /*margin: 10px auto 20px auto;*/
-    /*background-color: #8c8c8c;*/
-/*}*/
+div {
+    height: 100%; /* Высота */
+    margin: 10px;
+    padding: 20px;
 
-/*#sidebar {*/
-    /*float: left;*/
-    /*width: 200px;*/
-    /*border: 1px solid #b40000;*/
-/*}*/
+}
 
-/*#content {*/
-    /*float: left;*/
-    /*width: 600px;*/
-    /*border: 1px solid #49c7df;*/
-    /*padding: 10px;*/
-/*}*/
-
-/*#top {*/
-    /*float: right;*/
-
-/*}*/
-
-/*#author {*/
-    /*position: absolute;*/
-    /*right: 10px;*/
-    /*top: 10px;*/
-/*}*/
-/*#bottom {*/
-    /*position: absolute;*/
-    /*bottom: 100px;*/
-/*}*/
-
-/*#futer {*/
-    /*bottom: 30px;*/
-/*}*/
-
-.auth-block{
-    text-align: right;
-    width: 10%;
-    background-color: #7cfc00;
+.header {
+    text-align: center;
+    width: 95%;
+    position: relative;
+    top: -10px;
+    height: 90px;
+    background: #38a5f0;
 }
 
 
-.block{
-    text-align: left;
-    width: 90%;
-    background-color: #faf8ff;
+.left {
+    position: fixed;
+    top: 20px;
+    left: 25px;
+    height: 30px;
 }
-p {
-    color: black;
+
+
+.right {
+    position: fixed;
+    top: -20px;
+    right: 25px;
+    height: 45px;
+}
+
+.center {
+    position: fixed;
+    center: 0px;
+    right: 25px;
+    height: 30px;
+}
+
+.bottom {
+    align-content: center;
+    width: 95%;
+    text-align: center;
+    background: #CADADD;
+}
+
+.content {
+    width: 95%;
+    background: #f2f1f0;
+}
+
+
+.Table {
+        display: table;
+    }
+
+.Title {
+    display: table-caption;
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.Heading {
+    display: table-row;
+    font-weight: bold;
+    text-align: center;
+}
+
+.Row {
+    display: table-row;
+}
+
+.Cell {
+    display: table-cell;
+    border: solid;
+    text-align: center;
+    border-width: thin;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+A:link {
+    color: #036; /* Цвет непосещенных ссылок */
+}
+
+A:visited {
+    color: #606; /* Цвет посещенных ссылок */
+}
+
+A:hover {
+    color: #f00; /* Цвет ссылок при наведении на них курсора мыши */
+}
+
+A:active {
+    color: #ff0; /* Цвет активных ссылок */
 }
