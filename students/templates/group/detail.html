@@ -13,7 +13,10 @@
             {% for student in student_list %}
                 <div class="Row">
                     <div class="Cell">
-                    Student: <a href={% url "student_detail" student.pk %}>{{ student }} </a>
+                        {{ forloop.counter }}
+                    </div>
+                    <div class="Cell">
+                     <a href={% url "student_detail" student.pk %}>{{ student }} </a>
                     </div>
                 </div>
             {% endfor %}
