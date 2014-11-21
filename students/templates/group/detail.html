@@ -3,27 +3,28 @@
 
 {% block content %}
     <div class="content">
-        Group: {{ group }}
-                {% if user.is_staff == True %}
-                        <a href="{% url 'group_delete' group_pk %}" >delete</a>
-                        <a href="{% url 'group_update' group_pk %}" >update</a>
-                {% endif %}
-    <div class="Table">
-        {% if student_list %}
-            {% for student in student_list %}
-                <div class="Row">
-                    <div class="Cell">
-                        {{ forloop.counter }}
+        Group: {{ object }}
+                        <a href="{% url 'group_delete' object.id %}" >delete</a>
+                        <a href="{% url 'group_update' object.id %}" >update</a>
+        <div class="Table">
+            {% if object.students.all  %}
+                {% for student in object.students.all %}
+                    <div class="Row">
+                        <div class="Cell">
+                            {{ forloop.counter }}
+                        </div>
+                        <div class="Cell">
+                            {{ student }}
+                        </div>
+                        <div class="Cell">
+                            <a href={% url "student_detail" student.pk %}>detail</a>
+                        </div>
                     </div>
-                    <div class="Cell">
-                     <a href={% url "student_detail" student.pk %}>{{ student }} </a>
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
 
             {% else %}
-                <p>No students in group</p>
-        {% endif %}
-    </div>
+               <p>No students in group</p>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

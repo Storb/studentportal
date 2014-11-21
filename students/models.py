@@ -14,9 +14,6 @@ class Group(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('group_detail', kwargs={'pk': self.pk})
-
 
 class Student(models.Model):
     group = models.ForeignKey(Group, related_name='students')

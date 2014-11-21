@@ -1,10 +1,25 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.core.context_processors import csrf
-
-from .forms import UserCreateForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.views.generic import FormView
+from django.core.urlresolvers import reverse_lazy
+
+
+class RegisterUser(FormView):
+    template_name = "accounts/register_user.html"
+    success_url = reverse_lazy('register_success')
+    form_class = UserCreationForm
+
+    def form_valid(self, form):
+        form.save()
+        return super(RegisterUser, self).form_valid(form)
+
+    def form_invalid(self, form):
+        return super(RegisterUser, self).form_invalid(form)
+
 
 def user_detail(request, pk):
     user = User.objects.get(id=pk)
@@ -35,20 +50,6 @@ def invalid_login(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
-
-def register_user(request):
-    if request.method == 'POST':
-        form = UserCreateForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/accounts/register_success')
-
-    context = {}
-    context.update(csrf(request))
-    context['form'] = UserCreateForm()
-    print(context)
-    return render(request, 'accounts/register_user.html', context)
-
 
 def register_success(request):
     return render(request, 'accounts/register_success.html')
