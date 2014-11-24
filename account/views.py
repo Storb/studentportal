@@ -1,7 +1,6 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.contrib import auth
-from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.views.generic import FormView
@@ -17,15 +16,11 @@ class RegisterUser(FormView):
         form.save()
         return super(RegisterUser, self).form_valid(form)
 
-    def form_invalid(self, form):
-        return super(RegisterUser, self).form_invalid(form)
-
 
 def user_detail(request, pk):
     user = User.objects.get(id=pk)
     form = {'form': user}
     return render(request,'accounts/user_detail.html', form)
-
 
 
 def login(request):

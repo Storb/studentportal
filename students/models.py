@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 class Group(models.Model):
     name = models.CharField(max_length=50)
-    elder = models.ForeignKey('Student', related_name='group_elder',
+    elder = models.OneToOneField('Student', related_name='group_elder',
                               blank=True, null=True)
 
     def __str__(self):
@@ -16,7 +16,7 @@ class Group(models.Model):
 
 
 class Student(models.Model):
-    group = models.ForeignKey(Group, related_name='students')
+    group = models.ForeignKey(Group, related_name='students', blank=True)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
     surname = models.CharField(max_length=25)

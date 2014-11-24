@@ -13,10 +13,10 @@ class QueryTimeMiddlewareShow(object):
     def process_response(self, request, response):
         query_time = time.time() - self._start_time
         numbers_query = len(connection.queries)
-        text_request = "Время запросов: %s, количество запросов: %s<br />" % (query_time, numbers_query)
+        text_request = "Time request: %s, how many requests: %s<br />" % (query_time, numbers_query)
 
         for i in connection.queries:
-            text_request += " запрос: %s<br />" % (i)
+            text_request += " request: %s<br />" % (i)
 
         if response.status_code == 200:
             response.content += bytes(text_request, 'utf-8')

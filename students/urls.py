@@ -16,6 +16,6 @@ urlpatterns = patterns('',
     url(r'^student_update/(?P<pk>\d+)$', views.StudentUpdate.as_view() ,name='student_update'),
     url(r'^student_detail/(?P<pk>\d+)$', views.StudentDetail.as_view() ,name='student_detail'),
     url(r'^student_delete/(?P<pk>\d+)$', views.StudentDelete.as_view() ,name='student_delete'),
-    url(r'^student_create/$', views.StudentCreate.as_view() ,name='student_create'),
+    url(r'^student_create/$', views.StudentCreate.as_view(), name='student_create'),
 )
 

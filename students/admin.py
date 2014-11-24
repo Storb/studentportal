@@ -9,8 +9,8 @@ class StudentInline(admin.TabularInline):
 
 class GroupAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,{'fields':['name']}),
-        (None,{'fields':['elder']}),
+        (None, {'fields':['name']}),
+        (None, {'fields':['elder']}),
     ]
     inlines = [StudentInline]
 
