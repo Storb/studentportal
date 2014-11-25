@@ -17,9 +17,9 @@ class Group(models.Model):
 
 class Student(models.Model):
     group = models.ForeignKey(Group, related_name='students', blank=True)
+    surname = models.CharField(max_length=25)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
-    surname = models.CharField(max_length=25)
     card_number = models.IntegerField(max_length=10)
     date_birthday = models.DateField('date birthday')
 

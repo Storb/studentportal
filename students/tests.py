@@ -25,7 +25,7 @@ class StudentsSimpleTest(TestCase):
 
 class GroupTest(TestCase):
 
-    def test_student_creation(self):
+    def test_creation(self):
         group = Group.objects.create(name='Test')
 
         Student.objects.create(

@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from .models import Group, Student
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, UpdateView, DeleteView, DetailView, CreateView
+from students.forms import StudentForm
+
 
 
 class GroupList(ListView):
@@ -38,6 +40,21 @@ class GroupDetail(DetailView):
     model = Group
     template_name = 'group/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(GroupDetail, self).get_context_data(**kwargs)
+        context['student_form'] = StudentForm(initial={'group': self.object})
+        return context
+
+    def post(self, request, pk):
+        self.object = Group.objects.get(id=pk)
+        context = self.get_context_data()
+        form = StudentForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return self.render_to_response(context)
+        context['student_form'] = form
+        return self.render_to_response(context)
+
 
 class StudentList(ListView):
     model = Student
@@ -60,26 +77,28 @@ class StudentDetail(DetailView):
 
 class StudentDelete(DeleteView):
     model = Student
-    success_url = reverse_lazy('students_list')
     template_name = 'student/delete.html'
+    group_id = None
+    success_url = reverse_lazy('groups_list', group_id)
+
+    def get_context_data(self, **kwargs):
+        import ipdb;ipdb.set_trace()
+        context = super(StudentDelete, self).get_context_data(**kwargs)
+
 
 
 class StudentUpdate(UpdateView):
     model = Student
-    success_url = reverse_lazy('students_list')
+    success_url = reverse_lazy('groups_list')
     template_name = 'student/update.html'
 
     def form_valid(self, form):
         super(StudentUpdate, self).form_valid(form)
         return redirect(reverse_lazy('student_detail', args=(self.object.id, )))
 
+
 def settings_show(request):
     return render(request, 'group/settings_show.html')
-
-def custom_tags(request):
-    student = get_object_or_404(Student,  id = 1)
-    context = {'student':  student}
-    return render(request, 'custom_tags.html', context )
 
 
 def base(request):

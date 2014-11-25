@@ -6,7 +6,7 @@ from . import views
 urlpatterns = patterns('',
     url(r'^$', views.base, name='base'),
     url(r'^settings/$', views.settings_show, name='settings_show'),
-    url(r'^custom_tag/$', views.custom_tags, name='custom_tags'),
+    # url(r'^custom_tag/$', views.custom_tags, name='custom_tags'),
     url(r'^group_create/$', views.GroupCreate.as_view() ,name='group_create'),
     url(r'^group_detail/(?P<pk>\d+)$', views.GroupDetail.as_view() ,name='group_detail'),
     url(r'^groups_list/$', views.GroupList.as_view() ,name='groups_list'),

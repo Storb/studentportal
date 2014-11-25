@@ -3,28 +3,68 @@
 
 {% block content %}
     <div class="content">
-        Group: {{ object }}
+        Group: {{ group }}
                         <a href="{% url 'group_delete' object.id %}" >delete</a>
                         <a href="{% url 'group_update' object.id %}" >update</a>
         <div class="Table">
             {% if object.students.all  %}
+                {{ object.students.set_all }}
+                <div class="Row">
+                    <div class="Cell" >
+                        <p>№</p>
+                    </div>
+                    <div class="Cell">
+                        <p>Surname</p>
+                    </div>
+                    <div class="Cell">
+                        <p>First name</p>
+                    </div>
+                    <div class="Cell">
+                        <p>Last name</p>
+                    </div>
+                    <div class="Cell">
+                        <p>Card number</p>
+                    </div>
+                    <div class="Cell">
+                        <p>Date birthday</p>
+                    </div>
+                </div>
                 {% for student in object.students.all %}
                     <div class="Row">
                         <div class="Cell">
                             {{ forloop.counter }}
                         </div>
                         <div class="Cell">
-                            {{ student }}
+                            {{ student.first_name }}
+                        </div>
+                        <div class="Cell">
+                            {{ student.last_name }}
+                        </div>
+                        <div class="Cell">
+                            {{ student.surname }}
+                        </div>
+                        <div class="Cell">
+                            {{ student.card_number }}
+                        </div>
+                        <div class="Cell">
+                            {{ student.date_birthday }}
                         </div>
                         <div class="Cell">
                             <a href={% url "student_detail" student.pk %}>detail</a>
                         </div>
+                        <div class="Cell">
+                            <a href={% url "student_delete" student.pk %}>delete</a>
+                        </div>
                     </div>
                 {% endfor %}
-
             {% else %}
                <p>No students in group</p>
             {% endif %}
+
         </div>
+            <form method="post">{% csrf_token %}
+                {{ student_form }}
+                <button type="submit">Add student</button>
+            </form>
     </div>
 {% endblock %}
