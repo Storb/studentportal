@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic.base import TemplateView
 from .models import Group, Student
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import ListView, UpdateView, DeleteView, DetailView, CreateView
@@ -95,9 +96,9 @@ class StudentUpdate(UpdateView):
         return redirect(reverse_lazy('student_detail', args=(self.object.id, )))
 
 
-def settings_show(request):
-    return render(request, 'group/settings_show.html')
+class SettingShow(TemplateView):
+    template_name = "group/settings_show.html"
 
 
-def base(request):
-    return render(request, 'base.html')
+class BaseView(TemplateView):
+    template_name = "base.html"

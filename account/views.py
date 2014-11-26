@@ -1,12 +1,11 @@
 from django.contrib.auth import login
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.views.generic import FormView, DetailView
 from django.core.urlresolvers import reverse_lazy
-from django.views.generic.base import TemplateResponseMixin, View
+from django.views.generic.base import TemplateResponseMixin, View, TemplateView
 
 
 class RegisterUser(FormView):
@@ -42,7 +41,8 @@ class LogoutView(TemplateResponseMixin, View):
         return HttpResponseRedirect('/')
 
 
-def register_success(request):
-    return render(request, 'accounts/register_success.html')
+class SuccessRegView(TemplateView):
+    template_name = "accounts/register_success.html"
+
 
 
