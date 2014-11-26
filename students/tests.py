@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from students.models import Group, Student
 
+
 # Create your tests here.
 
 
@@ -20,50 +21,25 @@ class StudentsSimpleTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
-
-
-
 class GroupTest(TestCase):
 
     def test_creation(self):
+        resp = self.client.post(reverse('register_user'),
+                                data={'username': 'user',
+                                      'email': 'user@test.com',
+                                      'password1': '123',
+                                      'password2': '123'})
+        self.assertRedirects(resp, reverse('register_success'))
+
+        login = self.client.login(username='user', password='123')
+        self.assertEqual(login, True)
+
         group = Group.objects.create(name='Test')
 
         Student.objects.create(
-            first_name='f_name', last_name='l_name',surname='surename',
-            card_number='1234567890', date_birthday='1987-3-3',
-            group=group
+            first_name='f_name', last_name='l_name',
+            surname='surename', card_number='1234567890',
+            date_birthday='1987-3-3', group=group
         )
 
         self.assertEqual(Student.objects.all().count(), 1)
-
-
-
-# class SimpleTest(ClientTest):
-#
-#
-#     fixtures = ['fixtures/initial_data.json']
-#
-#     def test_functions(self):
-#         # проверка на возможность логинится
-#         login = self.client.login(username='moma', password='415823')
-#         self.failUnless(login, 'Could not log in')
-#
-#         # добавление группы
-#         data_group = {'name': 'Abc', 'elder': ''}
-#         self.POST('/group_create/', data_group, status=302)
-#
-#         # добавление студента в группу
-#         group_list = Group.objects.all()
-#         group_id = 0
-#         for g in group_list:
-#             if g.id > group_id:
-#                 group_id = g.id
-#         data_student = {'first_name': 'AAAA',
-#                         'last_name': 'bbbbb',
-#                         'surname': 'cccc',
-#                         'date_birthday': '1987-3-3',
-#                         'card_number': '5555',
-#                         'group': group_id, }
-#         print(group_id)
-#         self.POST('/student_create/', data_student, status=302)
-#

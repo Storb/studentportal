@@ -42,7 +42,6 @@ class LogoutView(TemplateResponseMixin, View):
         return HttpResponseRedirect('/')
 
 
-
 def register_success(request):
     return render(request, 'accounts/register_success.html')
 
