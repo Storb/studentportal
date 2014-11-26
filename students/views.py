@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Group, Student
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import ListView, UpdateView, DeleteView, DetailView, CreateView
 from students.forms import StudentForm
 
@@ -78,13 +78,11 @@ class StudentDetail(DetailView):
 class StudentDelete(DeleteView):
     model = Student
     template_name = 'student/delete.html'
-    group_id = None
-    success_url = reverse_lazy('groups_list', group_id)
 
-    def get_context_data(self, **kwargs):
-        import ipdb;ipdb.set_trace()
-        context = super(StudentDelete, self).get_context_data(**kwargs)
-
+    def get_success_url(self):
+        context = self.get_context_data()
+        group_id = context['object'].group_id
+        return reverse('group_detail', args=(group_id, ))
 
 
 class StudentUpdate(UpdateView):
