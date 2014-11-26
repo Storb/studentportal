@@ -1,10 +1,12 @@
+from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import auth
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 from django.core.urlresolvers import reverse_lazy
+from django.views.generic.base import TemplateResponseMixin, View
 
 
 class RegisterUser(FormView):
@@ -17,34 +19,29 @@ class RegisterUser(FormView):
         return super(RegisterUser, self).form_valid(form)
 
 
-def user_detail(request, pk):
-    user = User.objects.get(id=pk)
-    form = {'form': user}
-    return render(request,'accounts/user_detail.html', form)
+class UserDetail(DetailView):
+    model = User
+    template_name = "accounts/user_detail.html"
 
 
-def login(request):
+class LoginView(FormView):
+    form_class = AuthenticationForm
+    template_name = "accounts/login.html"
+    success_url = "/"
 
-    if request.method == "POST":
-        username = request.POST.get('username','')
-        password = request.POST.get('password','')
-        user = auth.authenticate(username=username, password=password)
-        if user is not None and user.is_active:
-            auth.login(request, user)
-            return HttpResponseRedirect('/')
-    else:
-        return HttpResponseRedirect('/accounts/invalid')
-
-    return HttpResponseRedirect('/accounts/invalid')
+    def form_valid(self, form):
+        login(self.request, form.get_user())
+        return super(LoginView, self).form_valid(form)
 
 
-def invalid_login(request):
-    return render(request,'accounts/invalid_login.html')
+class LogoutView(TemplateResponseMixin, View):
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated():
+            auth.logout(self.request)
+        return HttpResponseRedirect('/')
 
 
-def logout(request):
-    auth.logout(request)
-    return HttpResponseRedirect('/')
 
 def register_success(request):
     return render(request, 'accounts/register_success.html')

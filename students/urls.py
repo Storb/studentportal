@@ -2,7 +2,6 @@ from django.conf.urls import patterns, url
 from . import views
 
 
-
 urlpatterns = patterns('',
     url(r'^$', views.base, name='base'),
     url(r'^settings/$', views.settings_show, name='settings_show'),
