@@ -30,6 +30,7 @@ class GroupDelete(DeleteView):
 
 class GroupCreate(CreateView):
     model = Group
+    success_url = 'groups_list'
     template_name = 'group/create.html'
 
     def form_valid(self, form):
@@ -57,6 +58,12 @@ class GroupDetail(DetailView):
         return self.render_to_response(context)
 
 
+class StudentDetail(DetailView):
+    model = Student
+    template_name = 'student/detail.html'
+
+
+
 class StudentList(ListView):
     model = Student
     template_name = 'student/students_list.html'
@@ -64,16 +71,12 @@ class StudentList(ListView):
 
 class StudentCreate(CreateView):
     model = Student
+    success_url = '/'
     template_name = 'student/create.html'
 
     def form_valid(self, form):
         super(StudentCreate, self).form_valid(form)
         return redirect(reverse_lazy('student_detail', args=(self.object.id, )))
-
-
-class StudentDetail(DetailView):
-    model = Student
-    template_name = 'student/detail.html'
 
 
 class StudentDelete(DeleteView):

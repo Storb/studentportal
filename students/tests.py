@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-
+from students.models import Group
 
 class RegisterTest(TestCase):
 
@@ -12,47 +12,41 @@ class RegisterTest(TestCase):
                                       'password2': '123'})
         self.assertRedirects(resp, reverse('register_success'))
 
-
-class LoginUserTest(TestCase):
-
-    def login_user(self):
-        import ipdb;ipdb.set_trace()
         login = self.client.login(username='user', password='123')
         self.assertEqual(login, True)
 
 
 class GroupCreateTest(TestCase):
 
-    def group_creation(self):
-        resp = self.client.post(reverse('group_create'),
-                                data={'name':'group'})
-        self.assertEqual(resp, True)
+    def test_group_creation(self):
+        
+        resp = self.client.post(reverse('group_create'), data={'name':'group'})
+        self.assertRedirects(resp, reverse('group_detail', args=[1, ]))
 
 
 class StudentCreateTest(TestCase):
-
-    def student_creation(self):
-
+    def test_student_creation(self):
+        group = Group.objects.create(name='name')
+        id = group.id
         resp = self.client.post(reverse('student_create'),
-                                data={'first_name': 'f_name',
-                                      'last_name': 'l_name',
-            'surname':'surename', 'card_number': '1234567890',
-            'date_birthday': '1987-3-3', 'group':'group'})
+                                data={'first_name': 'f_name', 'last_name': 'l_name',
+                                      'surname':'surname', 'card_number': '1234567890',
+                                      'date_birthday': '1987-3-3', 'group': id})
 
-        self.assertEqual(resp, True)
+        self.assertRedirects(resp, reverse('student_detail', args=[1, ]))
 
 
-# class SimpleTest(TestCase):
-#     def test_basic_addition(self):
-#         """
-#         Tests that 1 + 1 always equals 2.
-#         """
-#         self.assertEqual(1 + 1, 2)
-#
-#
-# class StudentsSimpleTest(TestCase):
-#     def test_index(self):
-#         url = reverse("student_create")
-#         resp = self.client.get(url)
-#         self.assertEqual(resp.status_code, 200)
+class SimpleTest(TestCase):
+    def test_basic_addition(self):
+        """
+        Tests that 1 + 1 always equals 2.
+        """
+        self.assertEqual(1 + 1, 2)
+
+
+class StudentsSimpleTest(TestCase):
+    def test_index(self):
+        url = reverse("student_create")
+        resp = self.client.get(url)
+        self.assertEqual(resp.status_code, 200)
 
