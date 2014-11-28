@@ -19,7 +19,6 @@ class RegisterTest(TestCase):
 class GroupCreateTest(TestCase):
 
     def test_group_creation(self):
-        
         resp = self.client.post(reverse('group_create'), data={'name':'group'})
         self.assertRedirects(resp, reverse('group_detail', args=[1, ]))
 
@@ -27,11 +26,10 @@ class GroupCreateTest(TestCase):
 class StudentCreateTest(TestCase):
     def test_student_creation(self):
         group = Group.objects.create(name='name')
-        id = group.id
         resp = self.client.post(reverse('student_create'),
                                 data={'first_name': 'f_name', 'last_name': 'l_name',
                                       'surname':'surname', 'card_number': '1234567890',
-                                      'date_birthday': '1987-3-3', 'group': id})
+                                      'date_birthday': '1987-3-3', 'group': group.id})
 
         self.assertRedirects(resp, reverse('student_detail', args=[1, ]))
 

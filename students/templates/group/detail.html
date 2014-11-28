@@ -2,69 +2,39 @@
 
 
 {% block content %}
-    <div class="content">
         Group: {{ group }}
                         <a href="{% url 'group_delete' object.id %}" >delete</a>
                         <a href="{% url 'group_update' object.id %}" >update</a>
-        <div class="Table">
+        <table class="table table-bordered">
+            <tr>
+                <th>№</th>
+                <th>Surname</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Card number</th>
+                <th>Date birthday</th>
+            </tr>
             {% if object.students.all  %}
-                {{ object.students.set_all }}
-                <div class="Row">
-                    <div class="Cell" >
-                        <p>№</p>
-                    </div>
-                    <div class="Cell">
-                        <p>Surname</p>
-                    </div>
-                    <div class="Cell">
-                        <p>First name</p>
-                    </div>
-                    <div class="Cell">
-                        <p>Last name</p>
-                    </div>
-                    <div class="Cell">
-                        <p>Card number</p>
-                    </div>
-                    <div class="Cell">
-                        <p>Date birthday</p>
-                    </div>
-                </div>
                 {% for student in object.students.all %}
-                    <div class="Row">
-                        <div class="Cell">
-                            {{ forloop.counter }}
-                        </div>
-                        <div class="Cell">
-                            {{ student.first_name }}
-                        </div>
-                        <div class="Cell">
-                            {{ student.last_name }}
-                        </div>
-                        <div class="Cell">
-                            {{ student.surname }}
-                        </div>
-                        <div class="Cell">
-                            {{ student.card_number }}
-                        </div>
-                        <div class="Cell">
-                            {{ student.date_birthday }}
-                        </div>
-                        <div class="Cell">
-                            <a href={% url "student_detail" student.pk %}>detail</a>
-                        </div>
-                        <div class="Cell">
-                            <a href={% url "student_delete" student.pk %}>delete</a>
-                        </div>
-                    </div>
+                <tr>
+                    <th>{{ forloop.counter }}</th>
+                    <th>{{ student.surname }}</th>
+                    <th>{{ student.first_name }}</th>
+                    <th>{{ student.last_name }}</th>
+                    <th>{{ student.card_number }}</th>
+                    <th>{{ student.date_birthday }}</th>
+                    <th><a href={% url "student_detail" student.pk %}>detail</a></th>
+                    <th><a href={% url "student_delete" student.pk %}>delete</a></th>
+                </tr>
                 {% endfor %}
             {% else %}
                <p>No students in group</p>
             {% endif %}
-
-        </div>
-            <form method="post">{% csrf_token %}
-                {{ student_form }}
-                <button type="submit">Add student</button>
-            </form>
-    </div>
+        </table>
+        <h6>
+        <form method="post">{% csrf_token %}
+            {{ student_form }}
+            <button type="submit">Add student</button>
+        </form>
+        </h6>
 {% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load render_to_admin %}
+
+{% block content %}
+    <h3><a href="{% url "student_create" %}">Create student</a></h3>
+        <table class="table table-bordered">
+            {% if object_list %}
+            <tr>
+                <th><p align="center">№</p></th>
+                <th><p align="center">S.F.L.</p></th>
+                <th><p align="center">update/delete</p></th>
+            </tr>
+            {% for student in object_list %}
+            <tr>
+                <th>{{ forloop.counter }}</th>
+                <th><a href="{% url "student_detail" student.id %}"> {{ student}}</a></th>
+                <th>
+                    <a href="{% url "student_update" student.id %}">update</a> /
+                    <a href="{% url "student_delete" student.id %}">delete</a>
+                    {% if user.is_superuser %}
+                    / <a href="{% go_to_admin student %}">go to admin</a>
+                    {% endif %}
+                </th>
+            </tr>
+            {% endfor %}
+            {% else %}
+                <p>No student</p>
+            {% endif %}
+        </table>
+{% endblock %}

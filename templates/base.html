@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block title %} Test project {% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<ol class="breadcrumb">
+    <li><a href="{% url "base" %}">Home</a></li>
+</ol>
+    <div class="container-fluid">
+            <!--header-->
+            <div class="row">
+                <div class="col-md-9 col-md-push-3">
+                    {% if user.is_authenticated %}
+                    {% block content %}
+
+                            <h3><a href="{% url "groups_list" %}">Groups</a></h3>
+                            <h3><a href="{% url "students_list" %}">Student list</a></h3><br>
+
+                    {% endblock %}
+                    {% else %}
+                            <img class="img-responsive" src="/static/water_PNG3319.png" >
+                    {% endif %}
+                </div>
+                <div class="col-md-3 col-md-pull-9">
+                {% if user.is_authenticated %}
+                    <div class="form-group">
+                        Welcome: <a href="{% url 'user_detail' user.id %}">{{ user }}</a>
+                    </div>
+                    <div class="form-group">
+                        <a href="/admin/password_change/">change password</a>
+                    </div>
+                    <form action = "{% url "logout" %}" method = "POST">{% csrf_token %}
+                    <input type = "submit" value = "Выйти">
+                    </form>
+                {% else %}
+                    <form action = "{% url "login" %}" role="form" method="post">{% csrf_token %}
+                        <div class="form-group">
+                        <label>Email or username</label>
+                        <input type="text" name="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-default">Войти</button>
+                    </form>
+                    <div class="form-group">
+                        <a href="{% url "register_user"%}">Registration</a>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a href  = "{% url "settings_show" %}" >Показать настройки</a><br />
+            </div>
+    </div>
+    <hr>
+</body>
+</html>
+
+
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head lang="en">#}
+{#    <meta charset="UTF-8">#}
+{#    <title>{% block title %} My Template {% endblock %}</title>#}
+{#    <link type="text/css" href="{{ STATIC_URL }}css/main.css" rel="stylesheet">#}
+{##}
+{#</head>#}
+{#<body>#}
+{#    {% block header %}#}
+{#        <div class="header">#}
+{#            <div class="left">#}
+{#                <a href="{% url "base" %}">Home</a>#}
+{#            </div>#}
+{#            <div class="right">#}
+{#                {% if user.is_authenticated %}#}
+{#                    Welcome:#}
+{#                    {% if user.first_name %}#}
+{#                        <a href="{% url 'user_detail' user.id %}">{{ user.first_name}}</a>#}
+{#                    {% else %}#}
+{#                        <a href="{% url 'user_detail' user.id %}">{{ user }}</a>#}
+{#                    {% endif %}#}
+{#                        <form action = "{% url "logout" %}" method = "POST">{% csrf_token %}#}
+{#                        <input type = "submit" value = "Выйти">#}
+{#                        </form>#}
+{#                        <p><button><a href = "/admin/password_change/" >change password</a></button></p>#}
+{##}
+{#                {% else %}#}
+{#                    <form action = "{% url "login" %}" method = "POST">{% csrf_token %}#}
+{#                        <p><label>Логин: </label>#}
+{#                        <input type = "text" name = "username" value = ""></p>#}
+{#                        <label>Пароль: </label>#}
+{#                        <input type = "password" name = "password" value = "">#}
+{#                        <input type = "submit" value = "Войти">#}
+{#                    </form>#}
+{#                    <form action="{% url "register_user" %}" method="post">{% csrf_token %}#}
+{#                        <input type = "submit" value = "registration">#}
+{#                    </form>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{#    {% endblock %}#}
+{#    {% block content %}#}
+{#        <div class="content">#}
+{#            <h3><a href="{% url "groups_list" %}">Groups</a></h3>#}
+{#            <h3><a href="{% url "students_list" %}">Student list</a></h3>#}
+{#        </div>#}
+{#    {% endblock %}#}
+{#        <div class="bottom">#}
+{#            <a href  = "{% url "settings_show" %}">Показать настройки</a><br />#}
+{#        </div>#}
+{#    <hr>#}
+{#</body>#}
+{#</html>#}

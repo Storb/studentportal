@@ -14,7 +14,7 @@ class GroupList(ListView):
 
 class GroupUpdate(UpdateView):
     model = Group
-    success_url = reverse_lazy('group_list')
+    success_url = reverse_lazy('groups_list')
     template_name = 'group/update.html'
 
     def form_valid(self, form):
