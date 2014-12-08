@@ -14,12 +14,10 @@ class GroupList(ListView):
 
 class GroupUpdate(UpdateView):
     model = Group
-    success_url = reverse_lazy('groups_list')
     template_name = 'group/update.html'
 
-    def form_valid(self, form):
-        super(GroupUpdate, self).form_valid(form)
-        return redirect(reverse_lazy("group_detail", args=(self.object.id,)))
+    def get_success_url(self):
+        return reverse('group_detail', args=(self.object.pk, ))
 
 
 class GroupDelete(DeleteView):
@@ -30,12 +28,10 @@ class GroupDelete(DeleteView):
 
 class GroupCreate(CreateView):
     model = Group
-    success_url = 'groups_list'
     template_name = 'group/create.html'
 
-    def form_valid(self, form):
-        super(GroupCreate, self).form_valid(form)
-        return redirect(reverse_lazy("group_detail", args=(self.object.id, )))
+    def get_success_url(self):
+        return reverse('group_detail', args=(self.object.pk, ))
 
 
 class GroupDetail(DetailView):
@@ -43,11 +39,12 @@ class GroupDetail(DetailView):
     template_name = 'group/detail.html'
 
     def get_context_data(self, **kwargs):
-        context = super(GroupDetail, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['student_form'] = StudentForm(initial={'group': self.object})
         return context
 
     def post(self, request, pk):
+        import ipdb;ipdb.set_trace()
         self.object = Group.objects.get(id=pk)
         context = self.get_context_data()
         form = StudentForm(data=request.POST)
@@ -71,12 +68,10 @@ class StudentList(ListView):
 
 class StudentCreate(CreateView):
     model = Student
-    success_url = '/'
     template_name = 'student/create.html'
 
-    def form_valid(self, form):
-        super(StudentCreate, self).form_valid(form)
-        return redirect(reverse_lazy('student_detail', args=(self.object.id, )))
+    def get_success_url(self):
+        return reverse('student_detail', args=(self.object.pk, ))
 
 
 class StudentDelete(DeleteView):
@@ -84,20 +79,15 @@ class StudentDelete(DeleteView):
     template_name = 'student/delete.html'
 
     def get_success_url(self):
-        context = self.get_context_data()
-        group_id = context['object'].group_id
-        return reverse('group_detail', args=(group_id, ))
+        return reverse('group_detail', args=(self.object.pk, ))
 
 
 class StudentUpdate(UpdateView):
     model = Student
-    success_url = reverse_lazy('groups_list')
     template_name = 'student/update.html'
 
-    def form_valid(self, form):
-        super(StudentUpdate, self).form_valid(form)
-        return redirect(reverse_lazy('student_detail', args=(self.object.id, )))
-
+    def get_success_url(self):
+        return reverse('student_detail', args=(self.object.pk, ))
 
 class SettingShow(TemplateView):
     template_name = "group/settings_show.html"

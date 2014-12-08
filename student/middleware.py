@@ -16,7 +16,7 @@ class QueryTimeMiddlewareShow(object):
         text_request = "Time request: %s, how many requests: %s<br />" % (query_time, numbers_query)
 
         for i in connection.queries:
-            text_request += " request: %s<br />" % (i)
+            text_request += " request: {0}<br />".format(i)
 
         if response.status_code == 200:
             response.content += bytes(text_request, 'utf-8')
