@@ -1,0 +1,21 @@
+{% load staticfiles %}
+
+<html ng-app="studApp">
+<head>
+<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular-route.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular-resource.js"></script>
+<script src="{% static "js/app.js" %}"></script>
+<script src="{% static "js/controllers.js" %}"></script>
+<script src="{% static "js/services.js" %}"></script>
+<body>
+
+{% verbatim %}
+
+<div ng-view></div>
+
+{% endverbatim %}
+</body>
+</html>
